@@ -468,6 +468,7 @@ def update_pr_channel_announcement_for_event(
             return False
     actor_name = author_github if status == "open" else (actor or "")
     _audit_notification(storage, event, "", tracked.get("channel_id"), actor_name)
+    _release_notification_claim(storage, dedupe_key)
     return True
 
 
