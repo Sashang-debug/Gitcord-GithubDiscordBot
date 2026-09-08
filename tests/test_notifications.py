@@ -1499,7 +1499,7 @@ def test_update_pr_channel_announcement_close_reopen_close() -> None:
         payload={"pr_number": 7, "closed_by": "bob"},
     )
     assert update_pr_channel_announcement_for_event(close_event1, storage, discord_writer, policy, config, "test")
-    storage.mark_pr_channel_announcement_status("MiniChain", 7, "closed")
+    assert storage.get_pr_channel_announcement("MiniChain", 7)["status"] == "closed"
     
     reopen_event = ContributionEvent(
         github_user="bob",
@@ -1509,7 +1509,7 @@ def test_update_pr_channel_announcement_close_reopen_close() -> None:
         payload={"pr_number": 7},
     )
     assert update_pr_channel_announcement_for_event(reopen_event, storage, discord_writer, policy, config, "test")
-    storage.mark_pr_channel_announcement_status("MiniChain", 7, "open")
+    assert storage.get_pr_channel_announcement("MiniChain", 7)["status"] == "open"
 
     close_event2 = ContributionEvent(
         github_user="bob",
@@ -1519,6 +1519,7 @@ def test_update_pr_channel_announcement_close_reopen_close() -> None:
         payload={"pr_number": 7, "closed_by": "bob"},
     )
     assert update_pr_channel_announcement_for_event(close_event2, storage, discord_writer, policy, config, "test")
+    assert storage.get_pr_channel_announcement("MiniChain", 7)["status"] == "closed"
     
     assert len(discord_writer.messages_edited) == 3
 
