@@ -2236,7 +2236,7 @@ def test_update_issue_channel_announcement_edits_on_close() -> None:
     assert content == ""
     assert embeds
     assert embeds[0]["color"] == 0xCF222E
-    assert "Closed 🔴 Gitcord-GithubDiscordBot #7" in embeds[0]["title"]
+    assert "Closed: Gitcord-GithubDiscordBot #7" in embeds[0]["title"]
     assert "**Opened by:**" not in embeds[0]["title"]
     assert "**Assigned to:**" not in (embeds[0].get("description") or "")
     assert "Closed by @mentor1" in embeds[0]["description"]
