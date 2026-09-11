@@ -1515,7 +1515,7 @@ class TestRepoRecommendationAndAutocomplete:
         )
 
         modal = PRStatusModal(repo="Knowledge-Agent", config=cfg, github_adapter=MagicMock())
-        modal.pr_number.value = "1"
+        modal.pr_number._value = "1"
 
         with patch("ghdcbot.bot.fetch_pr_health", return_value=sample_health):
             await modal.on_submit(mock_interaction)
@@ -1883,7 +1883,7 @@ class TestRepoRecommendationAndAutocomplete:
         )
 
         modal = PRStatusModal(repo=None, config=cfg, github_adapter=MagicMock())
-        modal.pr_number.value = "2"
+        modal.pr_number._value = "2"
 
         # Call WITHOUT repo parameter
         with patch("ghdcbot.bot.fetch_pr_health", return_value=sample_health) as mock_fetch:

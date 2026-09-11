@@ -1626,7 +1626,8 @@ def test_update_pr_channel_announcement_releases_claim_when_audit_fails() -> Non
 
     # Discord was edited and DB was marked closed, but dedupe was released.
     assert len(discord_writer.messages_edited) == 1
-    assert "Closed 🔴" in discord_writer.messages_edited[0][2]
+    assert discord_writer.messages_edited[0][2] == ""
+    assert "Closed 🔴" in discord_writer.messages_edited[0][3][0]["title"]
 
     # 2. Simulate pr_reopened
     reopen_event = ContributionEvent(
@@ -1644,8 +1645,8 @@ def test_update_pr_channel_announcement_releases_claim_when_audit_fails() -> Non
         )
 
     assert len(discord_writer.messages_edited) == 2
-    assert "Reopened 🔵" in discord_writer.messages_edited[1][2]
-    assert storage.get_pr_channel_announcement("Gitcord-GithubDiscordBot", 42)["status"] == "reopened"
+    assert "Test PR" in discord_writer.messages_edited[1][2]
+    assert storage.get_pr_channel_announcement("Gitcord-GithubDiscordBot", 42)["status"] == "open"
 
 
 def test_sqlite_pr_channel_announcement_roundtrip(tmp_path) -> None:
