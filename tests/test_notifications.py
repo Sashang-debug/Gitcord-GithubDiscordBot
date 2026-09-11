@@ -1340,7 +1340,7 @@ def test_update_pr_channel_announcement_edits_on_merge() -> None:
     assert content == ""
     assert embeds
     assert embeds[0]["color"] == 0x8250DF
-    assert "Merged:" in embeds[0]["title"]
+    assert "Merged 🟣" in embeds[0]["title"]
     assert "Merged by @mentor1" in embeds[0]["description"]
     assert storage.get_pr_channel_announcement("Gitcord-GithubDiscordBot", 42)["status"] == "merged"
 
@@ -1407,7 +1407,7 @@ def test_update_pr_channel_announcement_edits_on_close() -> None:
     embeds = discord_writer.messages_edited[0][3]
     assert embeds
     assert embeds[0]["color"] == 0xCF222E
-    assert "Closed:" in embeds[0]["title"]
+    assert "Closed 🔴" in embeds[0]["title"]
     assert "Closed by @bob" in embeds[0]["description"]
 
 
@@ -2236,7 +2236,7 @@ def test_update_issue_channel_announcement_edits_on_close() -> None:
     assert content == ""
     assert embeds
     assert embeds[0]["color"] == 0xCF222E
-    assert "Closed: Gitcord-GithubDiscordBot #7" in embeds[0]["title"]
+    assert "Closed 🔴 Gitcord-GithubDiscordBot #7" in embeds[0]["title"]
     assert "**Opened by:**" not in embeds[0]["title"]
     assert "**Assigned to:**" not in (embeds[0].get("description") or "")
     assert "Closed by @mentor1" in embeds[0]["description"]

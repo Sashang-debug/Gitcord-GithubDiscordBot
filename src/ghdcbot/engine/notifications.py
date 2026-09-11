@@ -1038,15 +1038,15 @@ def _build_pr_lifecycle_channel_message(
     raw_url = f"https://github.com/{github_org}/{repo}/pull/{pr_number}"
     actor = (actor_github or "").lstrip("@").strip()
     if status == "merged":
-        label = "Merged"
+        label = "Merged 🟣"
         status_line = f"**Status:** Merged by @{actor}" if actor else "**Status:** Merged"
         color = _GITHUB_MERGED_PURPLE
     else:
-        label = "Closed"
+        label = "Closed 🔴"
         status_line = f"**Status:** Closed by @{actor}" if actor else "**Status:** Closed"
         color = _GITHUB_CLOSED_RED
     # Discord embed titles are plain text (no markdown links); put the link in url.
-    title = f"{label}: {repo} #{pr_number} — {pr_title}"
+    title = f"{label} {repo} #{pr_number} — {pr_title}"
     if len(title) > 256:
         title = title[:253] + "..."
     embeds = [
