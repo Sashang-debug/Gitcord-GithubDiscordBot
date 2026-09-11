@@ -2046,7 +2046,7 @@ class TestRepoRecommendationAndAutocomplete:
         }
 
         modal = PRStatusModal(repo=None, config=cfg, github_adapter=mock_github)
-        modal.pr_number.value = "1"
+        modal.pr_number._value = "1"
 
         mock_interaction = MagicMock()
         mock_interaction.response.defer = AsyncMock()

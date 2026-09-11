@@ -1603,7 +1603,7 @@ def test_update_pr_channel_announcement_releases_claim_when_audit_fails() -> Non
         status="open",
     )
 
-    def _boom(*args: Any) -> None:
+    def _boom(*args, **kwargs) -> None:
         raise RuntimeError("audit failed")
 
     storage.append_audit_event = _boom  # type: ignore[method-assign]
